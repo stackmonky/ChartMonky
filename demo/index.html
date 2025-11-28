@@ -2,120 +2,157 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ChartMonky Demo</title>
 
-    <!-- Load ChartMonky library -->
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Load ChartMonky -->
     <script src="../js/chartmonky.js" defer></script>
     <script src="../js/charts/bar.js" defer></script>
 
-    <!-- Demo behavior -->
+    <!-- Demo logic -->
     <script src="demo.js" defer></script>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f7f7f7;
-            padding: 20px;
-            line-height: 1.5;
-        }
-
-        h1 {
-            margin-bottom: 5px;
-        }
-
-        .section {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-
-        .section h2 {
-            margin-top: 0;
-        }
-
-        pre {
-            background: #eee;
-            padding: 10px;
-            border-radius: 6px;
-            overflow-x: auto;
-        }
-
-        code {
-            font-size: 14px;
-        }
-    </style>
 </head>
 
-<body>
+<body class="bg-gray-100 p-6 font-sans">
 
-    <h1>ChartMonky</h1>
-    <p>A lightweight, modular chart library by Brendon.</p>
+    <!-- Header -->
+    <header class="max-w-4xl mx-auto mb-8">
+        <h1 class="text-4xl font-bold text-gray-800">ChartMonky</h1>
+        <p class="text-gray-600 mt-1">A lightweight, modular SVG chart library by Brendon.</p>
+    </header>
 
-    <!-- SECTION: Getting Started -->
-    <div class="section">
-        <h2>📌 Getting Started</h2>
-        <p>To use ChartMonky, include the core library and any chart modules you want:</p>
+    <!-- Content Sections -->
+    <div class="max-w-4xl mx-auto space-y-8">
 
-        <pre><code>&lt;script src="chartmonky.js" defer&gt;&lt;/script&gt;
+        <!-- Getting Started -->
+        <section class="bg-white shadow-sm p-6 rounded-xl">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">📌 Getting Started</h2>
+
+            <p class="text-gray-700 mb-3">
+                Add ChartMonky to your project:
+            </p>
+
+            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm"><code>&lt;script src="chartmonky.js" defer&gt;&lt;/script&gt;
 &lt;script src="charts/bar.js" defer&gt;&lt;/script&gt;
 </code></pre>
 
-        <p>Create a container to hold your charts:</p>
+            <p class="text-gray-700 mt-4 mb-2">Create a container:</p>
 
-        <pre><code>&lt;div id="myChart"&gt;&lt;/div&gt;</code></pre>
+            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm"><code>&lt;div id="myChart"&gt;&lt;/div&gt;
+</code></pre>
 
-        <p>Then generate a chart:</p>
+            <p class="text-gray-700 mt-4 mb-2">Render your first chart:</p>
 
-        <pre><code>const chart = ChartMonky.charts.bar([5, 10, 8], {
+            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm"><code>
+const chart = ChartMonky.charts.bar([5, 120, 80], {
     width: 300,
-    height: 200
+    height: 200,
+    labels: ["one", "two", "three"],
+    scaleStep: 20,
+    colors: ["red", "orange", "green"]
 });
 
 document.getElementById("myChart").appendChild(chart);
 </code></pre>
 
-        <p>That’s it! Your first ChartMonky chart is ready.</p>
-    </div>
+        </section>
 
-    <!-- SECTION: SVG Utilities -->
-    <div class="section">
-        <h2>🔧 SVG Utilities</h2>
-        <p>
-            ChartMonky includes low-level SVG utilities such as:
-        </p>
-        <pre><code>ChartMonky.utils.createSVG(width, height)
-ChartMonky.utils.createRect(x, y, width, height, color)
+        <!-- SVG Utilities -->
+        <section class="bg-white shadow-sm p-6 rounded-xl">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">🔧 SVG Utilities</h2>
+            <p class="text-gray-700 mb-3">ChartMonky includes low-level SVG helpers:</p>
+
+            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm"><code>
+        ChartMonky.utils.createSVG(width, height)
+        ChartMonky.utils.createRect(x, y, w, h, color)
+        ChartMonky.utils.createText(x, y, text, options)
+        ChartMonky.utils.createLine(x1, y1, x2, y2, options)
 </code></pre>
 
-        <p>Example:</p>
+            <p class="text-gray-700 mt-4 mb-2">Example:</p>
 
-        <pre><code>const svg = ChartMonky.utils.createSVG(200, 150);
+            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm"><code>
+const svg = ChartMonky.utils.createSVG(200, 150);
 const rect = ChartMonky.utils.createRect(20, 40, 50, 80, "green");
 svg.appendChild(rect);
 
-document.getElementById("utils-demo").appendChild(svg);</code></pre>
+document.getElementById("utils-demo").appendChild(svg);
+</code></pre>
 
-        <div id="utils-demo"></div>
-    </div>
 
-    <!-- SECTION: Bar Chart -->
-    <div class="section">
-        <h2>📊 Bar Chart Example</h2>
-        <p>The <strong>Bar Chart</strong> converts your numeric data into vertical bars.</p>
+            <div id="utils-demo" class="mt-4"></div>
+        </section>
 
-        <pre><code>const barChart = ChartMonky.charts.bar([5, 10, 8], {
+        <!-- Bar Chart Example -->
+        <section class="bg-white shadow-sm p-6 rounded-xl">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">📊 Bar Chart Example</h2>
+
+            <p class="text-gray-700 mb-2">A chart with labels & colors:</p>
+
+            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm"><code>
+const barChart = ChartMonky.charts.bar([5, 120, 80], {
     width: 300,
-    height: 200
+    height: 200,
+    labels: ["one", "two", "three"],
+    scaleStep: 20,
+    colors: ["red", "orange", "green"]
 });
 
 document.getElementById("bar-demo").appendChild(barChart);
 </code></pre>
 
-        <div id="bar-demo"></div>
+
+            <div id="bar-demo" class="mt-4"></div>
+        </section>
+
+        <!-- Options Section -->
+        <section class="bg-white shadow-sm p-6 rounded-xl">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">⚙️ Chart Options</h2>
+
+            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm"><code>
+{
+    width: Number,
+    height: Number,
+    labels: Array&lt;string&gt;,
+    color: String,         // one color for all bars
+    colors: Array&lt;string&gt;, // color per bar
+    scaleStep: Number       // value rounding increment
+}
+</code></pre>
+        </section>
+
+        <!-- Dynamic Example -->
+        <section class="bg-white shadow-sm p-6 rounded-xl">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">🔄 Dynamic Example</h2>
+            <p class="text-gray-700 mb-3">Updates every second with random data.</p>
+
+            <div id="dynamic-demo" class="mt-4"></div>
+
+            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm mt-4"><code>
+setInterval(() => {
+    const data = [
+        Math.floor(Math.random() * 50),
+        Math.floor(Math.random() * 50),
+        Math.floor(Math.random() * 50)
+    ];
+
+    dynamic.innerHTML = "";
+    dynamic.appendChild(
+        ChartMonky.charts.bar(data, {
+            width: 300,
+            height: 200,
+            labels: ["A", "B", "C"],
+            scaleStep: 10
+        })
+    );
+}, 1000);
+</code></pre>
+        </section>
+
     </div>
 
 </body>
