@@ -10,13 +10,13 @@ utilsDemo.appendChild(svg);
 // --- Bar Chart Demo ---
 const barDemo = document.getElementById("bar-demo");
 
-const barChart = ChartMonky.charts.bar([5,10,80,10,6,50], {
+const barChart = ChartMonky.charts.bar([5,120,80,], {
     width: 300,
     height: 200,
     // default 10
-    labels: ["one", "two", "three", "four", "five", "six"],
+    labels: ["one", "two", "three"],
     scaleStep:20,
-    colors: ["red", "orange", "yellow", "green"],
+    colors: ["red", "orange", "green"],
 });
 
 barDemo.appendChild(barChart);
