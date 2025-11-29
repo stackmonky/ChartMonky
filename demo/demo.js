@@ -81,5 +81,5 @@ warehouseChart.addPoint({
     y: 87,
     color: "blue",
     flash: false,
-    radius: 6
+    radius: 5 
 });
