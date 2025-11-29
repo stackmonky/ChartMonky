@@ -86,6 +86,8 @@ document.getElementById("utils-demo").appendChild(svg);
             <div id="utils-demo" class="mt-4"></div>
         </section>
 
+
+
         <!-- Bar Chart Example -->
         <section class="bg-white shadow-sm p-6 rounded-xl">
             <h2 class="text-2xl font-semibold text-gray-800 mb-3">📊 Bar Chart Example</h2>
@@ -106,6 +108,41 @@ document.getElementById("bar-demo").appendChild(barChart);
 </code></pre>
 
             <div id="bar-demo" class="mt-4"></div>
+        </section>
+
+
+        <!-- Live Updating Bar Chart -->
+        <section class="bg-white shadow-sm p-6 rounded-xl">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">⏱️ Live Updating Bar Chart</h2>
+
+            <p class="text-gray-700 mb-2">This chart updates every second with random data:</p>
+
+            <div id="live-bar-demo" class="mt-4"></div>
+
+            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm mt-4">
+<code>
+// Auto-update every 1s
+function updateLiveBar() {
+    const data = Array.from({ length: 5 }, () =>
+        Math.floor(Math.random() * 100)
+    );
+
+    liveBar.innerHTML = "";
+
+    const chart = ChartMonky.charts.bar(data, {
+        width: 350,
+        height: 200,
+        labels: ["A","B","C","D","E"],
+        scaleStep: 10
+    });
+
+    liveBar.appendChild(chart);
+}
+
+setInterval(updateLiveBar, 1000);
+updateLiveBar();
+</code>
+    </pre>
         </section>
 
         <!-- Warehouse Map Example -->
@@ -148,4 +185,5 @@ setTimeout(() => {
     </div>
 
 </body>
+
 </html>

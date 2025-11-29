@@ -21,6 +21,36 @@ const barChart = ChartMonky.charts.bar([5,120,80], {
 
 barDemo.appendChild(barChart);
 
+// --- Live Bar Chart Demo ---
+const liveBar = document.getElementById("live-bar-demo");
+
+
+function updateLiveBar() {
+    const data = Array.from({ length: 3 }, () =>
+        Math.floor(Math.random() * 100)
+    );
+// reset the chart
+    liveBar.innerHTML = "";
+
+    const chart = ChartMonky.charts.bar(data, {
+        width: 350,
+        height: 200,
+        labels: ["A", "B", "C"],
+        scaleStep: 10,
+        colors: ["red","orange","green"],
+    });
+
+    liveBar.appendChild(chart);
+}
+
+setInterval(updateLiveBar, 1000);
+updateLiveBar();
+
+
+
+
+
+
 // --- Warehouse Map Chart Demo ---
 const warehouseDemo = document.getElementById("warehouse-demo");
 
