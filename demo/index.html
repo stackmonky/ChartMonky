@@ -9,11 +9,8 @@
     <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Load ChartMonky -->
+    <!-- Load ChartMonky (single bundle) -->
     <script src="../js/chartmonky.js" defer></script>
-    
-    <!-- old script file -->
-    <!-- <script src="../js/charts/bar.js" defer></script> -->
 
     <!-- Demo logic -->
     <script src="demo.js" defer></script>
@@ -27,64 +24,64 @@
         <p class="text-gray-600 mt-1">A lightweight, modular SVG chart library by Brendon.</p>
     </header>
 
-    <!-- Content Sections -->
     <div class="max-w-4xl mx-auto space-y-8">
 
         <!-- Getting Started -->
         <section class="bg-white shadow-sm p-6 rounded-xl">
             <h2 class="text-2xl font-semibold text-gray-800 mb-3">📌 Getting Started</h2>
 
-            <p class="text-gray-700 mb-3">
-                Add ChartMonky to your project:
-            </p>
+            <p class="text-gray-700 mb-3">Add ChartMonky to your project:</p>
 
-            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm"><code>&lt;script src="https://stackmonky.github.io/ChartMonky/js/chartmonky.js"&gt;&lt;/script&gt;
-&lt;script src="https://stackmonky.github.io/ChartMonky/js/charts/bar.js"&gt;&lt;/script&gt;
+            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm">
+<code>&lt;script src="https://stackmonky.github.io/ChartMonky/js/chartmonky.js"&gt;&lt;/script&gt;
 </code></pre>
 
             <p class="text-gray-700 mt-4 mb-2">Create a container:</p>
 
-            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm"><code>&lt;div id="myChart"&gt;&lt;/div&gt;
-</code></pre>
+            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm">
+<code>&lt;div id="myChart"&gt;&lt;/div&gt;</code>
+            </pre>
 
             <p class="text-gray-700 mt-4 mb-2">Render your first chart:</p>
 
-            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm"><code>
-const chart = ChartMonky.charts.bar([5, 120, 80], {
+            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm">
+<code>
+const chart = ChartMonky.charts.bar([5,120,80], {
     width: 300,
     height: 200,
-    labels: ["one", "two", "three"],
+    labels: ["one","two","three"],
     scaleStep: 20,
-    colors: ["red", "orange", "green"]
+    colors: ["red","orange","green"]
 });
 
 document.getElementById("myChart").appendChild(chart);
 </code></pre>
-
         </section>
 
         <!-- SVG Utilities -->
         <section class="bg-white shadow-sm p-6 rounded-xl">
             <h2 class="text-2xl font-semibold text-gray-800 mb-3">🔧 SVG Utilities</h2>
+
             <p class="text-gray-700 mb-3">ChartMonky includes low-level SVG helpers:</p>
 
-            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm"><code>
-        ChartMonky.utils.createSVG(width, height)
-        ChartMonky.utils.createRect(x, y, w, h, color)
-        ChartMonky.utils.createText(x, y, text, options)
-        ChartMonky.utils.createLine(x1, y1, x2, y2, options)
+            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm">
+<code>
+ChartMonky.utils.createSVG(width, height)
+ChartMonky.utils.createRect(x, y, w, h, color)
+ChartMonky.utils.createText(x, y, text, options)
+ChartMonky.utils.createLine(x1, y1, x2, y2, options)
 </code></pre>
 
             <p class="text-gray-700 mt-4 mb-2">Example:</p>
 
-            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm"><code>
+            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm">
+<code>
 const svg = ChartMonky.utils.createSVG(200, 150);
 const rect = ChartMonky.utils.createRect(20, 40, 50, 80, "green");
 svg.appendChild(rect);
 
 document.getElementById("utils-demo").appendChild(svg);
 </code></pre>
-
 
             <div id="utils-demo" class="mt-4"></div>
         </section>
@@ -95,68 +92,60 @@ document.getElementById("utils-demo").appendChild(svg);
 
             <p class="text-gray-700 mb-2">A chart with labels & colors:</p>
 
-            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm"><code>
-const barChart = ChartMonky.charts.bar([5, 120, 80], {
+            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm">
+<code>
+const barChart = ChartMonky.charts.bar([5,120,80], {
     width: 300,
     height: 200,
-    labels: ["one", "two", "three"],
+    labels: ["one","two","three"],
     scaleStep: 20,
-    colors: ["red", "orange", "green"]
+    colors: ["red","orange","green"]
 });
 
 document.getElementById("bar-demo").appendChild(barChart);
 </code></pre>
 
-
             <div id="bar-demo" class="mt-4"></div>
         </section>
 
-        <!-- Options Section -->
+        <!-- Warehouse Map Example -->
         <section class="bg-white shadow-sm p-6 rounded-xl">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-3">⚙️ Chart Options</h2>
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">🏭 Warehouse Map Chart Example</h2>
 
-            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm"><code>
-{
-    width: Number,
-    height: Number,
-    labels: Array&lt;string&gt;,
-    color: String,         // one color for all bars
-    colors: Array&lt;string&gt;, // color per bar
-    scaleStep: Number       // value rounding increment
-}
+            <p class="text-gray-700 mb-2">A warehouse map with points:</p>
+
+            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm">
+<code>
+const warehouseChart = ChartMonky.charts.warehouse({
+    width: 400,
+    height: 300,
+    image: "https://stackmonky.github.io/ChartMonky/images/warehouse.png",
+    points: [
+        { id: "a1", x: 50, y: 80, color: "red", flash: true }
+    ]
+});
+
+document.getElementById("warehouse-demo").appendChild(warehouseChart.svg);
+
+// Example: dynamically add
+warehouseChart.addPoint({
+    id: "a2",
+    x: 120,
+    y: 150,
+    color: "blue",
+    flash: false
+});
+
+// Example: remove after 2 seconds
+setTimeout(() => {
+    warehouseChart.removePoint("a1");
+}, 2000);
 </code></pre>
-        </section>
 
-        <!-- Dynamic Example -->
-        <section class="bg-white shadow-sm p-6 rounded-xl">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-3">🔄 Dynamic Example</h2>
-            <p class="text-gray-700 mb-3">Updates every second with random data.</p>
-
-            <div id="dynamic-demo" class="mt-4"></div>
-
-            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm mt-4"><code>
-setInterval(() => {
-    const data = [
-        Math.floor(Math.random() * 50),
-        Math.floor(Math.random() * 50),
-        Math.floor(Math.random() * 50)
-    ];
-
-    dynamic.innerHTML = "";
-    dynamic.appendChild(
-        ChartMonky.charts.bar(data, {
-            width: 300,
-            height: 200,
-            labels: ["A", "B", "C"],
-            scaleStep: 10
-        })
-    );
-}, 1000);
-</code></pre>
+            <div id="warehouse-demo" class="mt-4"></div>
         </section>
 
     </div>
 
 </body>
-
 </html>
