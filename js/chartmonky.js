@@ -8,7 +8,7 @@ const ChartMonky = window.ChartMonky;
 
 
 // Create an SVG element
-ChartMonky.utils.createSVG = function(width, height) {
+ChartMonky.utils.createSVG = function (width, height) {
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 
     svg.setAttribute("width", width);
@@ -20,7 +20,7 @@ ChartMonky.utils.createSVG = function(width, height) {
 };
 
 // Create a rectangle element
-ChartMonky.utils.createRect = function(x, y, width, height, fill = "green") {
+ChartMonky.utils.createRect = function (x, y, width, height, fill = "green") {
     const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
 
     rect.setAttribute("x", x);
@@ -32,7 +32,7 @@ ChartMonky.utils.createRect = function(x, y, width, height, fill = "green") {
     return rect;
 };
 
-ChartMonky.utils.createText = function(x, y, textContent, options = {}) {
+ChartMonky.utils.createText = function (x, y, textContent, options = {}) {
     const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
 
     text.setAttribute("x", x);
@@ -94,54 +94,145 @@ ChartMonky.charts.bar = function (data, options = {}) {
     // === Draw each bar ===
     data.forEach((value, index) => {
 
-    const barHeight = value * scale;
+        const barHeight = value * scale;
 
-    const x = padding + index * (barWidth + spacing);
-    const y = height - padding - barHeight;
+        const x = padding + index * (barWidth + spacing);
+        const y = height - padding - barHeight;
 
-    // --- Determine color ---
-    let fillColor = "blue"; // default
+        // --- Determine color ---
+        let fillColor = "blue"; // default
 
-    if (barColors && barColors[index]) {
-        fillColor = barColors[index];
-    } else if (barColor) {
-        fillColor = barColor;
-    }
+        if (barColors && barColors[index]) {
+            fillColor = barColors[index];
+        } else if (barColor) {
+            fillColor = barColor;
+        }
 
-    // --- Create the bar ---
-    const bar = ChartMonky.utils.createRect(
-        x,
-        y,
-        barWidth,
-        barHeight,
-        fillColor
-    );
-    svg.appendChild(bar);
-    // --- Draw value label above bar ---
-    const valueX = x + barWidth / 2;
-    const valueY = y - 5;
-    const valueLabel = ChartMonky.utils.createText(valueX,valueY, value.toString(),{
-        fontSize:'10px',
-        color:fillColor || "black",
-        anchor:'middle'
-    })
-    svg.appendChild(valueLabel);
+        // --- Create the bar ---
+        const bar = ChartMonky.utils.createRect(
+            x,
+            y,
+            barWidth,
+            barHeight,
+            fillColor
+        );
+        svg.appendChild(bar);
+        // --- Draw value label above bar ---
+        const valueX = x + barWidth / 2;
+        const valueY = y - 5;
+        const valueLabel = ChartMonky.utils.createText(valueX, valueY, value.toString(), {
+            fontSize: '10px',
+            color: fillColor || "black",
+            anchor: 'middle'
+        })
+        svg.appendChild(valueLabel);
 
 
-    // --- Draw category label under bar ---
-    const labelX = x + barWidth / 2;
-    const labelY = height - padding + 15;
+        // --- Draw category label under bar ---
+        const labelX = x + barWidth / 2;
+        const labelY = height - padding + 15;
 
-    const nameLabel = ChartMonky.utils.createText(labelX, labelY, labels[index], {
-        fontSize: "10px",
-        color: "black",
-        anchor: "middle"
+        const nameLabel = ChartMonky.utils.createText(labelX, labelY, labels[index], {
+            fontSize: "10px",
+            color: "black",
+            anchor: "middle"
+        });
+
+        svg.appendChild(nameLabel);
     });
-
-    svg.appendChild(nameLabel);
-});
 
 
 
     return svg;
 };
+
+// --------------------------------------------------------------------------
+// warehouse map chart module
+
+ChartMonky.charts.warehouse = function (options = {}) {
+    const image = options.image;
+    const height = options.height || 300;
+    const width = options.width || 500;
+    const points = options.points || [];
+
+    const svg = ChartMonky.utils.createSVG(width, height);
+
+    // --- Add background image ---
+    let ImageElement = document.createElementNS("http://www.w3.org/2000/svg", "image");
+    ImageElement.setAttribute("href", image);
+    ImageElement.setAttribute("width", width);
+    ImageElement.setAttribute("height", height);
+    svg.appendChild(ImageElement);
+
+    // --- Draw initial points ---
+    points.forEach(point => {
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("cx", point.x);
+        circle.setAttribute("cy", point.y);
+        circle.setAttribute("r", point.radius || 5);
+        circle.setAttribute("fill", point.color || "red");
+
+        if (point.id) circle.setAttribute("data-id", point.id);
+
+        // Store DOM reference
+        point.el = circle;
+
+        svg.appendChild(circle);
+
+        if (point.flash === true) {
+            const animate = document.createElementNS("http://www.w3.org/2000/svg", "animate");
+            animate.setAttribute("attributeName", "opacity");
+            animate.setAttribute("values", "1;0;1");
+            animate.setAttribute("dur", "1s");
+            animate.setAttribute("repeatCount", "indefinite");
+            circle.appendChild(animate);
+        }
+    });
+
+    return {
+        svg: svg,
+        points: points,
+
+        // --- Dynamically add new point ---
+        addPoint: function (point) {
+            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute("cx", point.x);
+            circle.setAttribute("cy", point.y);
+            circle.setAttribute("r", point.radius || 5);
+            circle.setAttribute("fill", point.color || "red");
+
+            if (point.id) circle.setAttribute("data-id", point.id);
+
+            // Store element reference
+            point.el = circle;
+
+            svg.appendChild(circle);
+            points.push(point);
+
+            if (point.flash === true) {
+                const animate = document.createElementNS("http://www.w3.org/2000/svg", "animate");
+                animate.setAttribute("attributeName", "opacity");
+                animate.setAttribute("values", "1;0;1");
+                animate.setAttribute("dur", "1s");
+                animate.setAttribute("repeatCount", "indefinite");
+                circle.appendChild(animate);
+            }
+        },
+
+        // --- Remove a point by its id ---
+        removePoint: function (id) {
+            const index = points.findIndex(p => p.id === id);
+            if (index === -1) return;
+
+            const point = points[index];
+
+            // Remove SVG element
+            if (point.el) {
+                svg.removeChild(point.el);
+            }
+
+            // Remove from internal array
+            points.splice(index, 1);
+        }
+    };
+}
