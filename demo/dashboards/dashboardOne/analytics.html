@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols" rel="stylesheet">
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Dashboard Example One</title>
+</head>
+
+<body class="bg-[#0E1629]  text-gray-200">
+    <div id="dashboard-container" class="grid grid-cols-7 h-screen">
+        <div class="navbar">
+            <div class="border-b border-gray-500 p-10">Logo</div>
+            <ul class="p-4">
+                <li class=" border-l-2 border-red-600 bg-gray-800 p-4 text-red-500">
+                    <span class="material-symbols align-bottom text-red-500">
+                        finance
+                    </span>
+                    <a href="./analytics.html">Analytics</a>
+                </li>
+                <li class=" p-4 hover:text-red-500 ">
+                    <span class="material-symbols align-bottom">
+                        instant_mix
+                    </span>
+                    <a href="./controls.html">Controls</a>
+                </li>
+                <li class="p-4 hover:text-red-500 ">
+                    <span class="material-symbols align-bottom">
+                        map
+                    </span>
+                    <a href="./warehouse.html">Warehouse</a>
+                </li>
+            </ul>
+        </div>
+        <div class="border border-gray-500 col-span-6 text-center bg-gray-900">
+            <div>
+                <h1 class="text-2xl bold text-left bg-gray-300/5 p-4 border-b border-gray-500">Analytics Dashboard</h1>
+            </div>
+            <div>
+                <ul class="flex flex-row justify-center gap-4 p-10 ">
+                    <li
+                        class="card border border-gray-500 border-l-red-500 rounded-lg border-l-4 border-6 px-32 py-14 bg-gray-300/5 ">
+                        <p>
+                            Card 1
+                        </p>
+                    </li>
+                    <li
+                        class="card border border-gray-500 border-l-blue-500 rounded-lg border-l-4 border-6 px-32 py-14 bg-gray-300/5 ">
+                        <p>
+                            Card 2
+                        </p>
+                    </li>
+                    <li
+                        class="card border border-gray-500 border-l-green-500 rounded-lg border-l-4 border-6 px-32 py-14 bg-gray-300/5 ">
+                        <p>
+                            Card 3
+                        </p>
+                    </li>
+                    <li
+                        class="card border border-gray-500 border-l-purple-500 rounded-lg border-l-4 border-6 px-32 py-14 bg-gray-300/5 ">
+                        <p>
+                            Card 4
+                        </p>
+                    </li>
+
+                </ul>
+            </div>
+            <div>
+                <div>
+                </div>
+                <div></div>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
